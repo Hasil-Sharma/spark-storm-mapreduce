@@ -1,16 +1,23 @@
 import Common._
+import Dependencies._
 
 name := "spark-storm-mapreduce"
 
-version := "0.1"
+lazy val assemblySettings = Seq(
+  assemblyJarName in assembly := name.value + ".jar",
+  assemblyMergeStrategy in assembly := {
+    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+    case _                             => MergeStrategy.first
+  }
+)
 
-scalaVersion := "2.12.5"
-
-scalacOptions += "-target:jvm-1.7"
-
+lazy val root = (project in file("."))
+  .settings(commonSettings)
 
 lazy val storm = importSubProject("storm")
 
 lazy val mapreduce = importSubProject("mapreduce")
+  .settings(libraryDependencies ++= mapreduceLibraryDependencies)
+  .settings(assemblySettings)
 
 lazy val spark = importSubProject("spark")

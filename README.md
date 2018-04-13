@@ -1,0 +1,1 @@
+# Spark Storm MapReduce sample projects in Scala
