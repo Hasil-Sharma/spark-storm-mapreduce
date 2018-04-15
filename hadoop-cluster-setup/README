@@ -1,4 +1,17 @@
-ec2-54-186-159-178.us-west-2.compute.amazonaws.com:9000 - NameNode
-ec2-54-213-178-197.us-west-2.compute.amazonaws.com -
-ec2-35-166-204-151.us-west-2.compute.amazonaws.com
-ec2-54-69-41-233.us-west-2.compute.amazonaws.com
+# Setting up N-Node hadoop cluster on EC2
+
+Make sure you've private key for the ec2 instances, and security is configured such that you can access those ec2 instances.
+Before proceeding setup trusted ssh between your local computer and between ec2 instances. Refer to script `setup_ssh_trust.sh` to get an idea how to do this.
+
+
+In `constants.sh` mention all the AWS instances. The first instance runs ResourceManager and NodeManager. Rest all auto configured as slaves. Changing this behavior might lead to unprecedented load on nodes.
+
+When you think ec2 is properly setup, change `$KEY` variable in `constants.sh`, and place your private key in this directory. This is required to setup ssh trust between ec2 instances.
+
+After all this, issue following command:
+
+``` bash
+bash driver.sh setup_ssh_trust.sh download_hadoop.sh add_hadoop_variables.sh setup_core_site.sh setup_hdfs_site.sh setup_mapred_site.sh setup_slaves.sh setup_yarn_site.sh
+```
+
+After the script runs properly, login to master node (the first AWS instance you mentioned in `constants.sh`) `$HADDOP_PREFIX/bin/hdfs dfs -ls` will print the content of your root directory

@@ -7,6 +7,7 @@ chmod 400 ~/.ssh/$KEY
 
 cat << EOF > ~/.ssh/config
 HOST *amazonaws.com
+StrictHostKeyChecking no
 IdentityFile ~/.ssh/$KEY
 User ec2-user
 EOF
