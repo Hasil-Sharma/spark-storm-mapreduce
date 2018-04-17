@@ -21,3 +21,5 @@ lazy val mapreduce = importSubProject("mapreduce")
   .settings(assemblySettings)
 
 lazy val spark = importSubProject("spark")
+  .settings(scalaVersion := "2.11.7")
+  .settings(libraryDependencies ++= libraryDependencies_spark)
