@@ -10,7 +10,7 @@ object Pagerank extends App {
   val sc = new SparkContext(conf)
 
   // point to Google file
-  val data = sc.textFile("web-Google.txt")
+  val data = sc.textFile(args(0))
 
   // creating links among pages from file using cache to improve performance
   val links = data.filter(line=>(!line.startsWith("#"))).map(s=>s.split("\\s+")).map(ids=>(ids(0),ids(1))).distinct().groupByKey().cache()
