@@ -6,7 +6,7 @@ import org.apache.spark.SparkContext
 object Pagerank extends App {
 
   // creating SparkContext
-  val conf = new SparkConf().setAppName("Page Rank web-Google file").setMaster("local[*]")
+  val conf = new SparkConf().setAppName("Page Rank web-Google file")
   val sc = new SparkContext(conf)
 
   // point to Google file
@@ -40,6 +40,6 @@ object Pagerank extends App {
   val result = ranks.map(_.swap).sortByKey(false).map(_.swap)
 
   // save result as "resultado"
-  result.saveAsTextFile("resultado")
+  result.saveAsTextFile(args(1))
 
 }
