@@ -15,9 +15,12 @@ lazy val root = (project in file("."))
   .settings(commonSettings)
 
 lazy val storm = importSubProject("storm")
+  .settings(libraryDependencies ++= stormLibraryDependencies)
+  .settings(commonSettings)
+  .settings(assemblySettings)
 
 lazy val mapreduce = importSubProject("mapreduce")
   .settings(libraryDependencies ++= mapreduceLibraryDependencies)
-  .settings(assemblySettings)
+  .settings(commonSettings)
 
 lazy val spark = importSubProject("spark")
