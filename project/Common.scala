@@ -8,7 +8,8 @@ object Common {
     version := "0.1.0",
     scalaVersion := "2.11.12",
     scalacOptions += "-target:jvm-1.7",
-    javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+    javacOptions ++= Seq("-source", "1.7", "-target", "1.7"),
+      scalacOptions += "-Yresolve-term-conflict:package"
   )
 
     def importSubProject(name: String) : Project = (

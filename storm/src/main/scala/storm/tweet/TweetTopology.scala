@@ -1,6 +1,6 @@
 package storm.tweet
 
-import org.apache.storm.kafka.{BrokerHosts, KafkaSpout, SpoutConfig, ZkHosts}
+//import org.apache.storm.kafka.{BrokerHosts, KafkaSpout, SpoutConfig, ZkHosts}
 import org.apache.storm.{Config, LocalCluster, StormSubmitter}
 import org.apache.storm.topology.TopologyBuilder
 
@@ -18,14 +18,14 @@ object TweetTopology {
 //      new TweetProcessingBolt, 3).shuffleGrouping("kafkaspout")
 
     val builder:TopologyBuilder = new TopologyBuilder()
-    builder.setSpout("twitter-spout", new TwitterSpout())
+    builder.setSpout("twitter-spout", new TwitterSpout(),2)
 
-    builder.setBolt("twitter-filter", new TweetProcessingBolt()).shuffleGrouping("twitter-spout")
+    builder.setBolt("twitter-filter", new TweetProcessingBolt(),4).shuffleGrouping("twitter-spout")
 
     val conf = new Config()
     conf.setDebug(true)
 
-    conf.setNumWorkers(3)
+    conf.setNumWorkers(6)
     StormSubmitter.submitTopology("twitter",
         conf, builder.createTopology())
 

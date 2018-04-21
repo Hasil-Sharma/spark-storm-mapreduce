@@ -18,9 +18,3 @@ lazy val storm = importSubProject("storm")
   .settings(libraryDependencies ++= stormLibraryDependencies)
   .settings(commonSettings)
   .settings(assemblySettings)
-
-lazy val mapreduce = importSubProject("mapreduce")
-  .settings(libraryDependencies ++= mapreduceLibraryDependencies)
-  .settings(commonSettings)
-
-lazy val spark = importSubProject("spark")

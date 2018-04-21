@@ -24,7 +24,7 @@ object TwitterKafkaTopology {
     val conf = new Config()
     conf.setDebug(true)
 
-    conf.setNumWorkers(3)
+    conf.setNumWorkers(5)
     StormSubmitter.submitTopology("twitter",
       conf, topologyBuilder.createTopology())
 

@@ -25,7 +25,9 @@ class TweetProcessingBolt extends IRichBolt{
   override def execute(input: Tuple): Unit = {
     val tweet: Status = input.getValueByField("tweet").asInstanceOf[Status]
     val text = tweet.getText()
+    if(text.contains("The"))
     this.collector.emit(new Values(text))
+
   }
 
   override def cleanup(): Unit = {
