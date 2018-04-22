@@ -1,38 +1,17 @@
 package mapreduce
 
-import java.lang.Iterable
-import java.util.StringTokenizer
 
+import mapreduce.mappers.TokenizeMapper
+import mapreduce.reducers.IntSumReader
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.{IntWritable, Text}
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
-import org.apache.hadoop.mapreduce.{Job, Mapper, Reducer}
+import org.apache.hadoop.mapreduce.Job
 
-import scala.collection.JavaConverters._
 
 object WordCount {
-
-  class TokenizeMapper extends Mapper[Object, Text, Text, IntWritable]{
-    val one = new IntWritable(1)
-    val word = new Text()
-
-    override def map(key: Object, value: Text, context: Mapper[Object, Text, Text, IntWritable]#Context): Unit = {
-      val itr = new StringTokenizer(value.toString)
-      while(itr.hasMoreTokens){
-        word.set(itr.nextToken())
-        context.write(word, one)
-      }
-    }
-  }
-
-  class IntSumReader extends Reducer[Text, IntWritable, Text, IntWritable]{
-    override def reduce(key: Text, values: Iterable[IntWritable], context: Reducer[Text, IntWritable, Text, IntWritable]#Context): Unit = {
-      var sum = values.asScala.foldLeft(0)(_ + _.get)
-      context.write(key, new IntWritable(sum))
-    }
-  }
 
   def main(args: Array[String]): Unit = {
     val configuration = new Configuration
