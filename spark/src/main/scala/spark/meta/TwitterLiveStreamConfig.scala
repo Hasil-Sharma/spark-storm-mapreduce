@@ -1,11 +1,11 @@
 package spark.meta
 
 object TwitterLiveStreamConfig {
-  val ACCESS_TOKEN_SECRET: String = "rhEd1waKTgzZDeu6ALsuPKEosmLtJ0RQTRXoniKlaYCR0"
+  val ACCESS_TOKEN_SECRET: String = "7KAva5NHSc1ExAf3Ci3cmJFxwsQU4nlkoIIyHl9nCUeUc"
 
-  val ACCESS_TOKEN: String = "301842946-dkCmOcZI3OruqwTbqqE0RPNvjPfQbTD9lbY3RRr4"
+  val ACCESS_TOKEN: String = "1327782752-CnVRtLcEOLuOBlYhhFowfjli2bvjWqrSPbWxVgx"
 
-  val CONSUMER_SECRET: String = "gM3VVrb8bklgStmopMhmRRn1LRggFPuXsxuXZl8TF9BT4AbGoQ"
+  val CONSUMER_SECRET: String = "6fujwa7Q3nAJdhEjH20NSMdqdRWzzQWXPAGsbYkIZ3qIvnMiOT"
 
-  val CONSUMER_KEY: String = "Ew7AUM7p4wtKxn1Dar4TiDdIQ"
+  val CONSUMER_KEY: String = "ibKVFwn6prLt6uHlOmvs1cTBu"
 }

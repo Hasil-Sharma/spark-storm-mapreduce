@@ -16,13 +16,13 @@ class GetTweets {
   var _twitterStream: TwitterStream = _
   var queue: LinkedBlockingQueue[String] = _
 
-  def consumeTweets(num: Int): List[String] = {
+  def consumeTweets(num: Int, token: String): List[String] = {
 
     queue = new LinkedBlockingQueue[String](num)
     val buffer : ListBuffer[String] = new ListBuffer[String]()
     val listener: StatusListener = new StatusListener {
       override def onStatus(status: Status): Unit = {
-        queue.offer(TwitterObjectFactory.getRawJSON(status))
+        queue.offer(status.getText)
       }
 
       override def onDeletionNotice(statusDeletionNotice: StatusDeletionNotice): Unit = ???
@@ -34,7 +34,7 @@ class GetTweets {
       override def onStallWarning(warning: StallWarning): Unit = ???
 
       override def onException(ex: Exception): Unit = {
-        println(f"Exception $ex")
+        System.exit(0)
       }
     }
 
@@ -52,8 +52,12 @@ class GetTweets {
 
     while(buffer.size <= num){
       val ret = Option(queue.poll())
-      if (ret.nonEmpty)
+      if (ret.nonEmpty && ret.get.contains(token)) {
         buffer += ret.get
+        println(s"Done with: ${buffer.size}")
+      }
+
+
     }
 
     _twitterStream.shutdown()
