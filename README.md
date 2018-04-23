@@ -1,4 +1,4 @@
-spark# Spark Storm MapReduce sample projects in Scala
+# Spark Storm MapReduce Project in Scala
 
 
 ## Mapreduce
