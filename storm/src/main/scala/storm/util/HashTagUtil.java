@@ -28,5 +28,5 @@ public class HashTagUtil {
     public List<String> getTagList(String team){
         return teamToHashTagMap.get(team);
     }
-    
+
 }
